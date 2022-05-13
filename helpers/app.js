@@ -92,3 +92,40 @@ function addEmployee () {
 
     ])
 };
+
+// WHEN I choose to update an employee role
+// THEN I am prompted to select an employee to update and their new role
+
+function updateEmployee () {
+    return inquirer.prompt ([
+        {
+            name:"newRole",
+            message: "Please secect their new role",
+            type: "list",
+            choices: roleArr
+        },
+        {
+            name:"newMan",
+            message: "Please secect their new Manager",
+            type: "list",
+            choices: manArr
+        },
+        {   name:"newDep",
+            message: "Please secect their new Department",
+            type: "list",
+            choices: depArr
+        },
+    ])
+};
+
+// function to remove employee
+function removeEmployee() {
+    return inquirer.prompt ([
+        {
+           name:"detEmp" ,
+           message:"Please choose the employee you want to remove.",
+           type: "list",
+           choices: empArr
+        }
+    ])
+};
