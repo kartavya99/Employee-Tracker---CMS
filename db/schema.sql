@@ -19,6 +19,7 @@ CREATE TABLE role_table (
     title VARCHAR(30) NOT NULL,
     salary DECIMAL,
     department id INT,
+    -- seeting department_id as FK and connecting it by referecing it to id coloum of departmetn table
     FOREIGN KEY (department_id)
     REFERENCES department(id)
     ON DELETE SET NULL
@@ -31,6 +32,7 @@ CREATE TABLE employee (
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
     role_id INT,
+    -- setting role_id as FK and connecting it by referecing it to id coloum of role_table table
     FOREIGN KEY(role_id)
     REFERENCES KEY role_table(id)
     ON DELETE SET NULL,
