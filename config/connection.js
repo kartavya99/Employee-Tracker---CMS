@@ -9,7 +9,7 @@ const app = express();
 
 
 
-const connecction = mysql.createConnection(
+const connection = mysql.createConnection(
     {
     host: "localhost",
     // MYSQL username
@@ -20,3 +20,5 @@ const connecction = mysql.createConnection(
     },
     console.log(`Connected to the movies_db Database.`)
 );
+
+module.exports = connection;
