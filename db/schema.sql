@@ -28,7 +28,7 @@ CREATE TABLE role_table (
 -- created table for the employee details including First and last name, role id, manager id.
 DROP TABLE IF EXISTS employee;
 CREATE TABLE employee (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
     role_id INT,
