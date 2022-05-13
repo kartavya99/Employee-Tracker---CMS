@@ -1,0 +1,26 @@
+{
+  "name": "employee-tracker---cms",
+  "version": "1.0.0",
+  "description": "interfaces that allow non-developers to easily view and interact with information stored in databases",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kartavya99/Employee-Tracker---CMS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kartavya99/Employee-Tracker---CMS/issues"
+  },
+  "homepage": "https://github.com/kartavya99/Employee-Tracker---CMS#readme",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "figlet": "^1.5.2",
+    "inquire": "^0.4.8",
+    "mysql2": "^2.3.3"
+  }
+}
