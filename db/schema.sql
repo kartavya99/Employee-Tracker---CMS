@@ -36,6 +36,9 @@ CREATE TABLE employee (
     FOREIGN KEY(role_id)
     REFERENCES role_table(id)
     ON DELETE SET NULL,
+    -- employee_title VARCHAR(30) NOT NULL,
+    -- FOREIGN KEY (employee_title)
+    -- REFERENCES role_table(title),
     manager_id INT,
     FOREIGN KEY (manager_id)
     REFERENCES employee(id)

@@ -1,13 +1,14 @@
 
+// Import and require inquirer and figlet 
 const inquirer = require("inquire");
 const figlet = require("figlet");
-const mysql = require("mysql2");
+
 
 
 
 
 // Figlet application name
-figlet("Employee \n \n Tracker", (err, data) => {
+figlet("EMPLOYEE \n \n \n MANAGEMENT \n \n \n SYSTEM ", (err, data) => {
     if(err) throw err;
     console.log(data);
 });
