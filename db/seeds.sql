@@ -18,7 +18,7 @@ VALUES  ("Sales Manager", "120000", 1),
         ("Senior Wer Dev", 90000, 3),
         ("Network Enginner", 90000, 3),
         ("Finance Manager", 120000, 4),
-        ("Financial accountant" 70000, 4),
+        ("Financial accountant", 70000, 4),
         ("Admin Manager", 90000, 5),
         ("Office Support", 55000, 5);
 
@@ -29,7 +29,7 @@ VALUES  ("Smith", "John", 1, NULL),
         ("Perry", "Helen", 4, NULL),
         ("Rich", "Emma", 5, NULL),
         ("Mary", "Jane", 6, 2),
-        ("Doe", "Jane", 7, 3)
+        ("Doe", "Jane", 7, 3),
         ("Hanks", "Tom", 8, 4),
         ("Parker", "Peter", 9, 1),
         ("Smith", "Molly", 10, 5);

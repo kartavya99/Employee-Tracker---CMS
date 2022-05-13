@@ -9,7 +9,7 @@ USE employee_db;
 DROP TABLE IF EXISTS department;
 CREATE TABLE department (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR (30) NOT NULL
+    department_name VARCHAR (30) NOT NULL
 );
 
 -- created table for the role which includes id, title, salary and department id
@@ -18,7 +18,7 @@ CREATE TABLE role_table (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(30) NOT NULL,
     salary DECIMAL,
-    department id INT,
+    department_id INT,
     -- seeting department_id as FK and connecting it by referecing it to id coloum of departmetn table
     FOREIGN KEY (department_id)
     REFERENCES department(id)
@@ -34,11 +34,11 @@ CREATE TABLE employee (
     role_id INT,
     -- setting role_id as FK and connecting it by referecing it to id coloum of role_table table
     FOREIGN KEY(role_id)
-    REFERENCES KEY role_table(id)
+    REFERENCES role_table(id)
     ON DELETE SET NULL,
     manager_id INT,
     FOREIGN KEY (manager_id)
-    REFERENCES employee(id),
+    REFERENCES employee(id)
     ON DELETE SET NULL
 );
 
