@@ -80,14 +80,14 @@ function addEmployee () {
         {
             name: "list",
             message: "Please select their role name",
-            type: "list",
-            choices: rolArr
+            type: "input"
+            
         },
         {
             name: "list",
             message: "Please select their manager",
-            type: "list",
-            choices: manArr
+            type: "input"
+            
         }
 
     ])
@@ -101,20 +101,20 @@ function updateEmployee () {
         {
             name:"newRole",
             message: "Please secect their new role",
-            type: "list",
-            choices: roleArr
+            type: "input"
+            
         },
         {
             name:"newMan",
             message: "Please secect their new Manager",
-            type: "list",
-            choices: manArr
+            type: "input"
+            
         },
         {   name:"newDep",
             message: "Please secect their new Department",
-            type: "list",
-            choices: depArr
-        },
+            type: "input"
+            
+        }
     ])
 };
 
@@ -124,8 +124,8 @@ function removeEmployee() {
         {
            name:"detEmp" ,
            message:"Please choose the employee you want to remove.",
-           type: "list",
-           choices: empArr
+           type: "input"
+           
         }
     ])
 };

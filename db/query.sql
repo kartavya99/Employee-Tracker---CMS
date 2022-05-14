@@ -16,6 +16,7 @@ role_table.salary AS Salary,
 department.department_name AS Department_name,
 employee.first_name AS Manager_First_name,
 employee.last_name AS Manager_First_name
-    FROM employee AS employee
-    JOIN role_table ON employee.department_id = department.id
-    JOIN employee ON employee.manager_id = employee.id;
+    FROM employee
+    JOIN role_table ON employee.role_id = role_table.id
+    JOIN department ON employee.department_id = department.id;
+    LEFT OUTER JOIN employee ON employee.manager_id = employee.id;
