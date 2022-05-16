@@ -47,7 +47,8 @@ function userOptions () {
     .then((answer) => {
         // viewEmployee();
         //viewManagers();
-        viewDept();
+        //viewDept();
+        viewRoles();
     })
 };
 
@@ -61,6 +62,15 @@ async function viewDept() {
     }).then(() => userOptions());
 };
 
+
+// function to obtain list of all roles
+async function viewRoles () {
+    await database.viewAllRoles().then(([rows]) => {
+        let roles = rows;
+        console.log("\n");
+        console.table(roles);
+    }).then(() => userOptions());
+};
 
 //  async function viewEmployee () {
 //     const employee = await database.viewAllEmployees();
