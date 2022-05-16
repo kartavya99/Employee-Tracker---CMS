@@ -7,6 +7,7 @@ const database = require("./db/database");
 // require console table
 const cTable = require('console.table');
 const connection = require("./config/connection");
+const { viewAllEmployees } = require("./db/database");
 
 
 
@@ -31,25 +32,42 @@ function userOptions () {
             type: "list",
             choices : 
             [   
-                "1- View all Departments",
-                "2 -View all Roles",
-                "3- View all Employees",
+                "1 - View all Departments",
+                "2 - View all Roles",
+                "3 - View all Employees",
                 "4 - View all Managers",
                 "5 - Add a Department",
-                "6- Add a Role",
-                "7- Add an Employee",
-                "8- Update an Employee Role",
-                "9- Remove an Employee",
-                "10- Exit"
+                "6 - Add a Role",
+                "7 - Add an Employee",
+                "8 - Update an Employee Role",
+                "9 - Remove an Employee",
+                "10 - Exit"
             ]
         }
     ])
     .then((answer) => {
-        // viewEmployee();
-        //viewManagers();
-        //viewDept();
-        viewRoles();
-    })
+       // viewDept(); - withouth swtich statement get list of all depts
+        switch (answer.optionTree) {
+            case "1 - view all Departments":
+                viewDept();
+                break;
+
+            case "2 - View all Roles":
+                viewRoles();
+                break;
+
+            case "3 - View all Employees":
+                viewEmployee();
+                break;
+
+            case "4 - view all Managers":
+                viewManagers();
+                break;
+
+        }
+               
+        
+    });
 };
 
 
@@ -81,13 +99,13 @@ async function viewRoles () {
 // };
 
 
-// async function viewEmployee() {
-//     await database.viewAllEmployees().then(([rows]) => {
-//         let employee = rows;
-//         console.log("\n");
-//         console.table(employee);
-//     }).then(() => userOptions());
-// };
+async function viewEmployee() {
+    await database.viewAllEmployees().then(([rows]) => {
+        let employee = rows;
+        console.log("\n");
+        console.table(employee);
+    }).then(() => userOptions());
+};
 
 async function viewManagers() {
     await database.viewAllManagers().then(([rows])=>{
@@ -97,7 +115,6 @@ async function viewManagers() {
     }).then(()=>userOptions());
 };
 
-// viewEmployee();
 
 
 // function addDepartment () {
