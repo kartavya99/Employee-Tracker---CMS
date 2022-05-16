@@ -34,12 +34,13 @@ class Database {
 
     // to add department
     addAllDept(department) {
-        return this.connection.promise().query("INSERT INTO department SET ?", department)
-        
-    };
-
-
-
+        return this.connection.promise().query(`INSERT INTO department SET ? `,  department, (err, result) => { 
+            if (err) {
+                console.log(err);
+            }
+            console.log(result);
+        })               
+    };    
 
 };
 
