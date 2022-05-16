@@ -52,6 +52,17 @@ class Database {
         })
     };
 
+    // to add an employee
+    addAllEmployee(employee) {
+        return this.connection.promise().query(`INSERT INTO employee (first_name, last_name, role_id) VALUES ( ? , ? , ? ) ` , employee , (err, result ) => {
+            if (err) {
+                console.log(err);
+            }
+            console.log(result);
+
+        })
+    };
+
 
 };
 

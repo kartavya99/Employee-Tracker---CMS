@@ -7,7 +7,7 @@ const database = require("./db/database");
 // require console table
 const cTable = require('console.table');
 const connection = require("./config/connection");
-const { viewAllEmployees, addAllrole } = require("./db/database");
+const { viewAllEmployees, addAllrole, addAllEmployee } = require("./db/database");
 
 
 
@@ -71,11 +71,13 @@ function userOptions () {
             case "6 - Add a Role":
                 addRole();
                 break;
-                
 
+            case "7 - Add an Employee":
+                addEmployee();
+                break;
+                
         }
-               
-        
+                      
     });
 };
 
@@ -168,8 +170,45 @@ function addRole () {
             let role = rows;
             console.log(` Added ${role.title} , ${role.dept} and ${role.salary} to the database`);
         }).then(() => userOptions());
-    })
+    });
 };
+
+
+function addEmployee () {
+    return inquirer.prompt([
+        {
+            name: "firstName",
+            message: "Please Enter their first name",
+            type: "input"
+        },
+        {
+            name: "lastName",
+            message: "Please Enter their last name",
+            type: "input"
+        },
+        {
+            name: "roleId",
+            message: "Please select their role ID",
+            type: "input"
+            
+        }
+        // {
+        //     name: "list",
+        //     message: "Please select their manager",
+        //     type: "input"
+            
+        // }
+
+    ]).then((employee) => {
+        console.log(employee);
+        database.addAllEmployee(employee.firstName, employee.lastName, employee.roleId).then((rows) => {
+            const employee = rows;
+            console.log(`added ${employee.firstName} ${employee.lastName} with ${employee.roleId} to the database`);
+        }).then(() => userOptions());
+    });
+};
+
+
     
     
         
