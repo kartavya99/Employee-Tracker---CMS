@@ -10,6 +10,11 @@ class Database {
         this.connection = connection;
     };
 
+    // to have list of all departments
+    viewAllDept () {
+        return this.connection.promise().query("SELECT department_name FROM department")
+    };
+
     // to have list of all employees 
     viewAllEmployees() {
         return this.connection.promise().query("SELECT * FROM employee")
@@ -20,6 +25,8 @@ class Database {
         return this.connection.promise().query("SELECT id, first_name, last_name FROM employee WHERE employee.manager_id IS NULL")
         employeeId;
     };
+
+
 
 };
 

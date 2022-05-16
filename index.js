@@ -35,7 +35,7 @@ function userOptions () {
                 "2 -View all Roles",
                 "3- View all Employees",
                 "4 - View all Managers",
-                "5 - dd a Department",
+                "5 - Add a Department",
                 "6- Add a Role",
                 "7- Add an Employee",
                 "8- Update an Employee Role",
@@ -46,8 +46,19 @@ function userOptions () {
     ])
     .then((answer) => {
         // viewEmployee();
-        viewManagers();
+        //viewManagers();
+        viewDept();
     })
+};
+
+
+// function to obtain list of all dept
+async function viewDept() {
+    await database.viewAllDept().then(([rows]) => {
+        let dept = rows;
+        console.log("\n");
+        console.table(dept);
+    }).then(() => userOptions());
 };
 
 
