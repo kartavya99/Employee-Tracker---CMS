@@ -28,9 +28,16 @@ class Database {
 
     // to have list of all managers
     viewAllManagers(employeeId) {
-        return this.connection.promise().query("SELECT id, first_name, last_name FROM employee WHERE employee.manager_id IS NULL")
-        employeeId;
+        return this.connection.promise().query("SELECT id, first_name, last_name FROM employee WHERE employee.manager_id IS NULL", employeeId)
+        
     };
+
+    // to add department
+    addAllDept(department) {
+        return this.connection.promise().query("INSERT INTO department SET ?", department)
+        
+    };
+
 
 
 

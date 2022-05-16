@@ -48,7 +48,7 @@ function userOptions () {
     .then((answer) => {
        // viewDept(); - withouth swtich statement get list of all depts
         switch (answer.optionTree) {
-            case "1 - view all Departments":
+            case "1 - View all Departments":
                 viewDept();
                 break;
 
@@ -60,9 +60,14 @@ function userOptions () {
                 viewEmployee();
                 break;
 
-            case "4 - view all Managers":
+            case "4 - View all Managers":
                 viewManagers();
                 break;
+            
+            case "5 - Add a Department":
+                addDept();
+                break;
+                
 
         }
                
@@ -115,6 +120,26 @@ async function viewManagers() {
     }).then(()=>userOptions());
 };
 
+async function addDept () {
+
+    const department = inquirer.prompt ([
+        {
+            name: "DepName",
+            message: "Please enter the name of the department",
+            type: "input"
+        }
+    ]);
+        await database.addAllDept(department.depName).then( (rows) => {
+            let departments = rows;
+            console.log(`Added ${department.depName} to the databse.`);
+        }).then(() => userOptions());     
+    
+}   
+    
+    
+        
+               
+  
 
 
 // function addDepartment () {
