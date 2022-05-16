@@ -34,27 +34,46 @@ function userOptions () {
                 "1- View all Departments",
                 "2 -View all Roles",
                 "3- View all Employees",
-                "4 - dd a Department",
-                "5- Add a Role",
-                "6- Add an Employee",
-                "7- Update an Employee Role",
-                "8- Remove an Employee",
-                "9- Exit"
+                "4 - View all Managers",
+                "5 - dd a Department",
+                "6- Add a Role",
+                "7- Add an Employee",
+                "8- Update an Employee Role",
+                "9- Remove an Employee",
+                "10- Exit"
             ]
         }
     ])
     .then((answer) => {
-        viewEmployee();
+        // viewEmployee();
+        viewManagers();
     })
 };
 
 
- async function viewEmployee () {
-    const employee = await database.viewAllEmployees();
+//  async function viewEmployee () {
+//     const employee = await database.viewAllEmployees();
 
-    console.log("\n");
-    console.table(employee);
-    userOptions();
+//     console.log("\n");
+//     console.table(employee);
+//     userOptions();
+// };
+
+
+// async function viewEmployee() {
+//     await database.viewAllEmployees().then(([rows]) => {
+//         let employee = rows;
+//         console.log("\n");
+//         console.table(employee);
+//     }).then(() => userOptions());
+// };
+
+async function viewManagers() {
+    await database.viewAllManagers().then(([rows])=>{
+        let managers = rows;
+        console.log("\n");
+        console.table(managers);
+    }).then(()=>userOptions());
 };
 
 // viewEmployee();

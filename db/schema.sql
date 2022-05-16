@@ -47,5 +47,6 @@ CREATE TABLE employee (
     FOREIGN KEY (department_id)
     REFERENCES department(id)
     ON DELETE SET NULL
+    
 );
 

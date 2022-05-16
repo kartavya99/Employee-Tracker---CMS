@@ -12,16 +12,16 @@ class Database {
 
     // to have list of all employees 
     viewAllEmployees() {
-        return this.connection.query("SELECT * FROM employee")
+        return this.connection.promise().query("SELECT * FROM employee")
     };
 
     // to have list of all managers
-    // findAllManagers(employeeId) {
-    //     return this.connection.query("SELECT id, first_name, last_name FROM employee WHERE id")
-    //     employeeId;
-    // };
+    viewAllManagers(employeeId) {
+        return this.connection.promise().query("SELECT id, first_name, last_name FROM employee WHERE employee.manager_id IS NULL")
+        employeeId;
+    };
 
-}
+};
 
 
-module.exports = Database;
+module.exports = new Database(connection);
