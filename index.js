@@ -1,7 +1,9 @@
 
 // Import and require inquirer and figlet 
-const inquirer = require("inquire");
+const inquirer = require("inquirer");
 const figlet = require("figlet");
+const database = require("./db/database");
+// const database = new Database;
 
 
 
@@ -13,6 +15,8 @@ const figlet = require("figlet");
 figlet("EMPLOYEE \n \n \n MANAGEMENT \n \n \n SYSTEM ", (err, data) => {
     if(err) throw err;
     console.log(data);
+
+    userOptions();
 });
 
 
@@ -30,15 +34,15 @@ function userOptions () {
             type: "list",
             choices : 
             [   
-                "View all Departments",
-                "View all Roles",
-                "View all Employees",
-                "Add a Department",
-                "Add a Role",
-                "Add an Employee",
-                "Update an Employee Role",
-                "Remove an Employee",
-                "Exit"
+                "1- View all Departments",
+                "2 -View all Roles",
+                "3- View all Employees",
+                "4 - dd a Department",
+                "5- Add a Role",
+                "6- Add an Employee",
+                "7- Update an Employee Role",
+                "8- Remove an Employee",
+                "9- Exit"
             ]
         }
     ])

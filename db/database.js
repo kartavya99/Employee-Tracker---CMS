@@ -24,4 +24,4 @@ class Database {
 }
 
 
-module.exports = new Database(connection);
+module.exports = Database;
