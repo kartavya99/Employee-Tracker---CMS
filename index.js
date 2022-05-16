@@ -122,17 +122,26 @@ async function viewManagers() {
 
 async function addDept () {
 
-    const department = inquirer.prompt ([
+     inquirer.prompt ([
         {
             name: "DepName",
             message: "Please enter the name of the department",
             type: "input"
         }
-    ]);
-        await database.addAllDept(department.depName).then( (rows) => {
+    ])
+    .then((department) => { 
+        console.log(department);
+        database.addAllDept(department.depName).then( (rows) => {
             let departments = rows;
             console.log(`Added ${department.depName} to the databse.`);
-        }).then(() => userOptions());     
+        }).then(() => userOptions()); 
+        
+    });
+    // console.log(department);
+    //     await database.addAllDept(department.depName).then( (rows) => {
+    //         let departments = rows;
+    //         console.log(`Added ${department.depName} to the databse.`);
+    //}).then(() => userOptions());     
     
 }   
     
