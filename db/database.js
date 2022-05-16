@@ -11,15 +11,15 @@ class Database {
     };
 
     // to have list of all employees 
-    findAllEmployees() {
+    viewAllEmployees() {
         return this.connection.query("SELECT * FROM employee")
     };
 
     // to have list of all managers
-    findAllManagers(employeeId) {
-        return this.connection.query("SELECT id, first_name, last_name FROM employee WHERE id")
-        employeeId;
-    };
+    // findAllManagers(employeeId) {
+    //     return this.connection.query("SELECT id, first_name, last_name FROM employee WHERE id")
+    //     employeeId;
+    // };
 
 }
 

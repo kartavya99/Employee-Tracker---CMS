@@ -2,12 +2,11 @@
 // Import and require inquirer and figlet 
 const inquirer = require("inquirer");
 const figlet = require("figlet");
+// import class Database
 const database = require("./db/database");
-// const database = new Database;
-
-
-
-
+// require console table
+const cTable = require('console.table');
+const connection = require("./config/connection");
 
 
 
@@ -18,8 +17,6 @@ figlet("EMPLOYEE \n \n \n MANAGEMENT \n \n \n SYSTEM ", (err, data) => {
 
     userOptions();
 });
-
-
 
 
 // View all dep, view all roles, view all employee, ,
@@ -46,16 +43,22 @@ function userOptions () {
             ]
         }
     ])
+    .then((answer) => {
+        viewEmployee();
+    })
 };
 
 
-async function viewEmployee () {
-    const employee = await database.findAllEmployees();
+ async function viewEmployee () {
+    const employee = await database.viewAllEmployees();
 
     console.log("\n");
     console.table(employee);
     userOptions();
-}
+};
+
+// viewEmployee();
+
 
 // function addDepartment () {
 //     return inquirer.prompt([
