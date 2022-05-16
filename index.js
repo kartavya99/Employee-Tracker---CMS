@@ -7,7 +7,7 @@ const database = require("./db/database");
 // require console table
 const cTable = require('console.table');
 const connection = require("./config/connection");
-const { viewAllEmployees } = require("./db/database");
+const { viewAllEmployees, addAllrole } = require("./db/database");
 
 
 
@@ -67,6 +67,10 @@ function userOptions () {
             case "5 - Add a Department":
                 addDept();
                 break;
+            
+            case "6 - Add a Role":
+                addRole();
+                break;
                 
 
         }
@@ -120,7 +124,7 @@ async function viewManagers() {
     }).then(()=>userOptions());
 };
 
-async function addDept () {
+function addDept () {
 
      inquirer.prompt ([
         {
@@ -131,19 +135,41 @@ async function addDept () {
     ])
     .then((department) => { 
         console.log(department);
-        database.addAllDept(department.depName).then( (rows) => {
+        database.addAllDept(department.DepName).then( (rows) => {
             let departments = rows;
-            console.log(`Added ${department.depName} to the databse.`);
+            console.log(`Added ${department.DepName} to the databse.`);
         }).then(() => userOptions()); 
         
     });
-    // console.log(department);
-    //     await database.addAllDept(department.depName).then( (rows) => {
-    //         let departments = rows;
-    //         console.log(`Added ${department.depName} to the databse.`);
-    //}).then(() => userOptions());     
     
-}   
+};
+
+function addRole () {
+    return inquirer.prompt([
+        {
+            name: "title",
+            message: "Please enter name of the role you would like to add ",
+            type: "input"
+        },
+        {
+            name: "dept",
+            message:"Please enter the department ID",
+            type: "number"
+        },
+        {
+            name: "salary",
+            message: "Please enter salary. (formate : 60000)",
+            type: "number"
+        }
+    ])
+    .then((role) => {
+        console.log(role);
+        database.addAllrole(role.title, role.dept, role.salary).then((rows) => {
+            let role = rows;
+            console.log(` Added ${role.title} , ${role.dept} and ${role.salary} to the database`);
+        }).then(() => userOptions());
+    })
+};
     
     
         

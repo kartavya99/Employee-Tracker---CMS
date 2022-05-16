@@ -34,7 +34,7 @@ class Database {
 
     // to add department
     addAllDept(department) {
-        return this.connection.promise().query(`INSERT INTO department SET ? `,  department, (err, result) => { 
+        return this.connection.promise().query(`INSERT INTO department (department_name) VALUES (?) `,  department , (err, result) => { 
             if (err) {
                 console.log(err);
             }
@@ -42,7 +42,20 @@ class Database {
         })               
     };    
 
+    // to add a role/ job title
+    addAllrole(role) {
+        return this.connection.promise().query(`INSERT INTO role_table (title) VALUES (?) ` , role , (err, result) => {
+            if (err) {
+                console.log(err);
+            }
+            console.log(result);
+        })
+    };
+
+
 };
+
+
 
 
 module.exports = new Database(connection);
