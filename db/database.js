@@ -74,6 +74,17 @@ class Database {
     };
 
 
+    // to remove employee
+    removeAllEmployee(roleId) {
+        return this.connection.promise().query(`DELETE FROM employee where id = ?`, roleId , (err, result) => {
+            if (err) {
+                console.log(err);
+            }
+                console.log(result);
+
+        })
+    };
+
 };
 
 // UPDATE employee (rolde_id , id) VALUES ( ?, ?)
