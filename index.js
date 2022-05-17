@@ -101,23 +101,26 @@ async function viewRoles () {
     }).then(() => userOptions());
 };
 
-//  async function viewEmployee () {
-//     const employee = await database.viewAllEmployees();
+ async function viewEmployee () {
+    const employee = await database.viewAllEmployees();
+    const result = [...employee];
+    console.log("\n");
+    // console.table(result);
+    console.table(result[0]);
+    userOptions();
+};
 
-//     console.log("\n");
-//     console.table(employee);
-//     userOptions();
+
+// async function viewEmployee() {
+//     await database.viewAllEmployees().then(([rows]) => {
+//         let employee = rows;
+//         console.log("\n");
+//         console.table(employee);
+//     }).then(() => userOptions());
 // };
 
 
-async function viewEmployee() {
-    await database.viewAllEmployees().then(([rows]) => {
-        let employee = rows;
-        console.log("\n");
-        console.table(employee);
-    }).then(() => userOptions());
-};
-
+//function to view managers
 async function viewManagers() {
     await database.viewAllManagers().then(([rows])=>{
         let managers = rows;
@@ -126,6 +129,8 @@ async function viewManagers() {
     }).then(()=>userOptions());
 };
 
+
+//function to add new department
 function addDept () {
 
      inquirer.prompt ([
@@ -146,6 +151,8 @@ function addDept () {
     
 };
 
+
+// function to add new Roles
 function addRole () {
     return inquirer.prompt([
         {
@@ -174,6 +181,7 @@ function addRole () {
 };
 
 
+// function to add new employee
 function addEmployee () {
     return inquirer.prompt([
         {

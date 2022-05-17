@@ -43,10 +43,10 @@ CREATE TABLE employee (
     FOREIGN KEY (manager_id)
     REFERENCES employee(id)
     ON DELETE SET NULL,
-    department_id INT,
-    FOREIGN KEY (department_id)
-    REFERENCES department(id)
-    ON DELETE SET NULL
+    -- department_id INT,
+    -- FOREIGN KEY (department_id)
+    -- REFERENCES department(id)
+    -- ON DELETE SET NULL
     
 );
 
