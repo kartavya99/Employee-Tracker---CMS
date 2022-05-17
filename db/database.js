@@ -54,6 +54,9 @@ class Database {
 
     // to add an employee
     addAllEmployee(firstName, lastName, roleId) {
+        // check for manager first
+        // if employee manager null
+        // if employee is not manager then send detials
         return this.connection.promise().query(`INSERT INTO employee (first_name, last_name, role_id) VALUES ( ? , ? , ? ) ` , [firstName, lastName, roleId] , (err, result ) => {
             if (err) {
                 console.log(err);
