@@ -90,9 +90,7 @@ class Database {
 
 };
 
-// UPDATE employee (rolde_id , id) VALUES ( ?, ?)
-// UPDATE employee SET role_id = ? where id = ?
-// [new role, employess id];
+
 
 
 

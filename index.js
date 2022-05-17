@@ -83,6 +83,9 @@ function userOptions () {
             case "9 - Remove an Employee":
                 removeEmployee();
                 break;
+            
+            case "10 - Exit":
+                exit();
                 
         }
                       
@@ -228,14 +231,15 @@ function updateEmployee() {
     
     return inquirer.prompt ([
         {
-            name:"roleId",
-            message: "Please secect their current role ID",
+            name:"id",
+            message: "Please secect their new role ID" ,
             type: "input"
+            
             
         },
         {
-            name:"id",
-            message: "Please secect their new role ID",
+            name:"roleId",
+            message: "Please secect their current employee ID",
             type: "input"
             
         }
@@ -246,9 +250,9 @@ function updateEmployee() {
         // }
     ]).then ((employee) => {
         console.log(employee);
-        database.updateAllEmployee(employee.roleId, employee.id).then((data) => {
+        database.updateAllEmployee(employee.id, employee.roleId).then((data) => {
             const employee = data;
-            console.log(`Updated ${employee.roleId} and ${employee.employeeId} to the database`);
+            console.log(`Updated ${employee.roleId} and ${employee.id} to the database`);
         }).then(() => userOptions());
     })
 
@@ -258,20 +262,24 @@ function updateEmployee() {
 function removeEmployee() {
     return inquirer.prompt ([
         {
-           name:"detEmp" ,
+           name:"rmEmp",
            message:"Please choose the employee ID you want to remove.",
            type: "input"
         }
 
     ]).then((employee) => {
         console.log(employee);
-        database.removeAllEmployee(employee.detEmp).then((data) => {
-            const employee = data;
-            console.log(`Employee with id number ${employee.detEmp} removed from database`);
-        }).then(() => userOptions);
+        database.removeAllEmployee(employee.rmEmp).then((data) => {
+            const employee = data;  
+            userOptions();
+        });
     })
 };
   
+function exit (){
+    console.log("GOodbye!");
+    process.exit();
+}
 
 
 
@@ -281,14 +289,3 @@ function removeEmployee() {
 
 
 
-// // function to remove employee
-// function removeEmployee() {
-//     return inquirer.prompt ([
-//         {
-//            name:"detEmp" ,
-//            message:"Please choose the employee you want to remove.",
-//            type: "input"
-           
-//         }
-//     ])
-// };
