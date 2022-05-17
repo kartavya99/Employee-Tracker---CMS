@@ -86,6 +86,7 @@ function userOptions () {
             
             case "10 - Exit":
                 exit();
+                break;
                 
         }
                       
