@@ -9,7 +9,7 @@ VALUES  ("Sales"),
         ("Admin");
 
 INSERT INTO role_table (title, salary, department_id)
-VALUES  ("Sales Manager", "120000", 1),
+VALUES  ("Sales Manager", 120000, 1),
         ("Sales Rep", 80000, 1),
         ("CS Manager", 100000, 2),
         ("CSR", 55000, 2),
@@ -26,7 +26,7 @@ INSERT INTO employee (last_name, first_name, role_id, manager_id)
 VALUES  ("Smith", "John", 1, NULL),
         ("Hopkins", "Jenny", 3, 1),
         ("Phillips", "Andrew", 5, NULL),
-        ("Perry", "Helen", 4, 5),
+        ("Perry", "Helen", 4, 3),
         ("Rich", "Emma", 5, NULL),
         ("Mary", "Jane", 6, 5),
         ("Doe", "Jane", 7, 3),
