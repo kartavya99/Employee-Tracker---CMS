@@ -75,6 +75,10 @@ function userOptions () {
             case "7 - Add an Employee":
                 addEmployee();
                 break;
+
+            case "8 - Update an Employee Role":
+                updateEmployee();
+                break;
                 
         }
                       
@@ -101,23 +105,23 @@ async function viewRoles () {
     }).then(() => userOptions());
 };
 
- async function viewEmployee () {
-    const employee = await database.viewAllEmployees();
-    const result = [...employee];
-    console.log("\n");
-    // console.table(result);
-    console.table(result[0]);
-    userOptions();
-};
-
-
-// async function viewEmployee() {
-//     await database.viewAllEmployees().then(([rows]) => {
-//         let employee = rows;
-//         console.log("\n");
-//         console.table(employee);
-//     }).then(() => userOptions());
+//  async function viewEmployee () {
+//     const employee = await database.viewAllEmployees();
+//     const result = [...employee];
+//     console.log("\n");
+//     // console.table(result);
+//     console.table(result[0]);
+//     userOptions();
 // };
+
+
+async function viewEmployee() {
+    await database.viewAllEmployees().then(([rows]) => {
+        let employee = rows;
+        console.log("\n");
+        console.table(employee);
+    }).then(() => userOptions());
+};
 
 
 //function to view managers
@@ -216,7 +220,35 @@ function addEmployee () {
     });
 };
 
+function updateEmployee() {
+    
+    return inquirer.prompt ([
+        {
+            name:"roleId",
+            message: "Please secect their current role ID",
+            type: "input"
+            
+        },
+        {
+            name:"id",
+            message: "Please secect their new role ID",
+            type: "input"
+            
+        }
+        // {   name:"newDep",
+        //     message: "Please secect their new Department",
+        //     type: "input"
+            
+        // }
+    ]).then ((employee) => {
+        console.log(employee);
+        database.updateAllEmployee(employee.roleId, employee.id).then((data) => {
+            const employee = data;
+            console.log(`Updated ${employee.roleId} and ${employee.employeeId} to the database`);
+        }).then(() => userOptions());
+    })
 
+};
     
     
         

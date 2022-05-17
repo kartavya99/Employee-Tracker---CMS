@@ -24,14 +24,14 @@ VALUES  ("Sales Manager", "120000", 1),
 
 INSERT INTO employee (last_name, first_name, role_id, manager_id)
 VALUES  ("Smith", "John", 1, NULL),
-        ("Hopkins", "Jenny", 2, NULL),
-        ("Phillips", "Andrew", 3, NULL),
-        ("Perry", "Helen", 4, NULL),
+        ("Hopkins", "Jenny", 3, ),
+        ("Phillips", "Andrew", 5, NULL),
+        ("Perry", "Helen", 4, 5),
         ("Rich", "Emma", 5, NULL),
-        ("Mary", "Jane", 6, 2),
+        ("Mary", "Jane", 6, 5),
         ("Doe", "Jane", 7, 3),
-        ("Hanks", "Tom", 8, 4),
-        ("Parker", "Peter", 9, 1),
-        ("Smith", "Molly", 10, 5);
+        ("Hanks", "Tom", 8, 5),
+        ("Parker", "Peter", 9, NULL),
+        ("Smith", "Molly", 11, NULL);
 
 

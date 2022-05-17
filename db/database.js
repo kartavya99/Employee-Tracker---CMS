@@ -43,8 +43,8 @@ class Database {
     };    
 
     // to add a role/ job title
-    addAllrole(role) {
-        return this.connection.promise().query(`INSERT INTO role_table (title) VALUES (?) ` , role , (err, result) => {
+    addAllrole(title, department_name, salary) {
+        return this.connection.promise().query(`INSERT INTO role_table (title, department_id, salary) VALUES (?, ?, ?) ` , [title, department_name, salary] , (err, result) => {
             if (err) {
                 console.log(err);
             }
@@ -63,9 +63,22 @@ class Database {
         })
     };
 
+    //to update employee
+    updateAllEmployee(roleId, id) {
+        return this.connection.promise(). query(`UPDATE employee SET role_id = ? where id = ?  `, [roleId, id] , (err, result) => {
+            if (err) {
+                console.log(err);
+            }
+                console.log(result);
+        })
+    };
+
 
 };
 
+// UPDATE employee (rolde_id , id) VALUES ( ?, ?)
+// UPDATE employee SET role_id = ? where id = ?
+// [new role, employess id];
 
 
 
