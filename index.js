@@ -221,17 +221,17 @@ function addEmployee () {
             message: "Please select their role ID",
             type: "input"
             
-        }
-        // {
-        //     name: "list",
-        //     message: "Please select their manager",
-        //     type: "input"
+        },
+        {
+            name: "mangId",
+            message: "Please select their manager ID",
+            type: "input"
             
-        // }
+        }
 
     ]).then((employee) => {
         console.log(employee);
-        database.addAllEmployee(employee.firstName, employee.lastName, employee.roleId).then((rows) => {
+        database.addAllEmployee(employee.firstName, employee.lastName, employee.roleId, employee.mangId).then((rows) => {
             const employee = rows;
             console.log(`added ${employee.firstName} ${employee.lastName} with ${employee.roleId} to the database`);
         }).then(() => userOptions());
