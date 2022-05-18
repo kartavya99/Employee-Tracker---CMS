@@ -1,6 +1,7 @@
 
 // Import and require inquirer and figlet 
 const inquirer = require("inquirer");
+const prompt = require("inquirer");
 const figlet = require("figlet");
 // import class Database
 const database = require("./db/database");
@@ -105,73 +106,124 @@ function userOptions () {
 
 
 // function to obtain list of all dept
+// async function viewDept() {
+//     await database.viewAllDept().then(([rows]) => {
+//         let dept = rows;
+//         console.log("\n");
+//         console.table(dept);
+//     }).then(() => userOptions());
+// };
+//converted above function into async
 async function viewDept() {
-    await database.viewAllDept().then(([rows]) => {
-        let dept = rows;
-        console.log("\n");
-        console.table(dept);
-    }).then(() => userOptions());
+    const dept = await database.viewAllDept();
+    const result = [...dept];
+    console.log("\n");
+    //console.table(dept);
+    console.table(result[0]);
+    userOptions();
 };
+
 
 
 // function to obtain list of all roles
-async function viewRoles () {
-    await database.viewAllRoles().then(([rows]) => {
-        let roles = rows;
-        console.log("\n");
-        console.table(roles);
-    }).then(() => userOptions());
+// async function viewRoles () {
+//     await database.viewAllRoles().then(([rows]) => {
+//         let roles = rows;
+//         console.log("\n");
+//         console.table(roles);
+//     }).then(() => userOptions());
+// };
+// converting above into async functin
+async function viewRoles() {
+    const roles = await database.viewAllRoles();
+    const result = [...roles];
+    console.log("\n");
+    console.table(roles[0]);
+    userOptions();
+
 };
 
-//  async function viewEmployee () {
-//     const employee = await database.viewAllEmployees();
-//     const result = [...employee];
-//     console.log("\n");
-//     // console.table(result);
-//     console.table(result[0]);
-//     userOptions();
+
+
+// async function viewEmployee() {
+//     await database.viewAllEmployees().then(([rows]) => {
+//         let employee = rows;
+//         console.log("\n");
+//         console.table(employee);
+//     }).then(() => userOptions());
 // };
 
-
-async function viewEmployee() {
-    await database.viewAllEmployees().then(([rows]) => {
-        let employee = rows;
-        console.log("\n");
-        console.table(employee);
-    }).then(() => userOptions());
+// async function for better readbility 
+async function viewEmployee () {
+    const employee = await database.viewAllEmployees();
+    const result = [...employee];
+    console.log("\n");
+    // console.table(result);
+    console.table(result[0]);
+    userOptions();
 };
+
+
 
 
 //function to view managers
+// async function viewManagers() {
+//     await database.viewAllManagers().then(([rows])=>{
+//         let managers = rows;
+//         console.log("\n");
+//         console.table(managers);
+//     }).then(()=>userOptions());
+// };
+// converting above function into async 
 async function viewManagers() {
-    await database.viewAllManagers().then(([rows])=>{
-        let managers = rows;
-        console.log("\n");
-        console.table(managers);
-    }).then(()=>userOptions());
+    const managers = await database.viewAllManagers();
+    let result = [...managers];
+    console.log("\n");
+    console.table(result[0]);
+    userOptions();
+
 };
 
 
 //function to add new department
-function addDept () {
+// function addDept () {
 
-     inquirer.prompt ([
+//      inquirer.prompt ([
+//         {
+//             name: "DepName",
+//             message: "Please enter the name of the department",
+//             type: "input"
+//         }
+//     ])
+//     .then((department) => { 
+//         console.log(department);
+//         database.addAllDept(department.DepName).then( (rows) => {
+//             let departments = rows;
+//             console.log(`Added ${department.DepName} to the databse.`);
+//         }).then(() => userOptions()); 
+        
+//     });
+    
+// };
+//converting above function into async
+async function addDept() {
+    inquirer.prompt ([
         {
             name: "DepName",
             message: "Please enter the name of the department",
             type: "input"
         }
-    ])
-    .then((department) => { 
-        console.log(department);
-        database.addAllDept(department.DepName).then( (rows) => {
-            let departments = rows;
-            console.log(`Added ${department.DepName} to the databse.`);
-        }).then(() => userOptions()); 
-        
-    });
-    
+    ]);
+    const department = await database.addAllDept(department.DepName);
+    let result = [...department];
+    // console.log("\n");
+    console.table(result[0]);
+    userOptions();
 };
+
+
+
+
 
 
 // function to add new Roles

@@ -115,7 +115,6 @@ class Database {
 // Update employee managers.
 //  View employees by manager.
 //  View employees by department.
-//  Delete  roles
 
 
 
