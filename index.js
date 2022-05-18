@@ -41,7 +41,8 @@ function userOptions () {
                 "7 - Add an Employee",
                 "8 - Update an Employee Role",
                 "9 - Remove an Employee",
-                "10 - Exit"
+                "10 - Remove Department",
+                "- Exit"
             ]
         }
     ])
@@ -83,8 +84,12 @@ function userOptions () {
             case "9 - Remove an Employee":
                 removeEmployee();
                 break;
+
+            case "10 - Remove Department":
+                removeDept();
+                break;
             
-            case "10 - Exit":
+            case "- Exit":
                 exit();
                 break;
                 
@@ -276,6 +281,24 @@ function removeEmployee() {
         });
     })
 };
+
+
+// function to remove deparment through dept id
+function removeDept () {
+    return inquirer.prompt([
+        {
+            name:"rmDept",
+            message:"Please choose the deparment ID you want to remove.",
+            type: "input"
+        }                  
+    ]).then((dept) => {
+        console.log(dept);
+        database.removeAlldept(dept.rmDept).then((data) => {
+            const dept = data;
+            userOptions();
+        })
+    })
+}
   
 function exit (){
     console.log("GOodbye!");

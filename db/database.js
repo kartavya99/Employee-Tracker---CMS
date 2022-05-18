@@ -54,9 +54,6 @@ class Database {
 
     // to add an employee
     addAllEmployee(firstName, lastName, roleId, manager_id) {
-        // check for manager first
-        // if employee manager null
-        // if employee is not manager then send detials
         return this.connection.promise().query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ( ? , ? , ?, ? ) ` , [firstName, lastName, roleId, manager_id] , (err, result ) => {
             if (err) {
                 console.log(err);
@@ -88,9 +85,23 @@ class Database {
         })
     };
 
+    // to remov department
+    removeAlldept(department_id) {
+        return this.connection.promise().query(`DELETE FROM department where id =? `, department_id, (err, result) => {
+            if(err) {
+                console.log(err)
+            } 
+                console.log(result);
+        });
+    }
+
 };
 
 
+// Update employee managers.
+//  View employees by manager.
+//  View employees by department.
+//  Delete departments, roles
 
 
 
