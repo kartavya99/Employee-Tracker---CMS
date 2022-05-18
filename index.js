@@ -1,14 +1,14 @@
 
 // Import and require inquirer and figlet 
 const inquirer = require("inquirer");
-const prompt = require("inquirer");
+// const prompt = require("inquirer");
 const figlet = require("figlet");
 // import class Database
 const database = require("./db/database");
 // require console table
 const cTable = require('console.table');
 const connection = require("./config/connection");
-const { viewAllEmployees, addAllrole, addAllEmployee, removeAllRole } = require("./db/database");
+const { viewAllEmployees, addAllrole, addAllEmployee, removeAllRole, viewAllDept } = require("./db/database");
 
 
 
@@ -44,6 +44,7 @@ function userOptions () {
                 "9 - Remove an Employee",
                 "10 - Remove Department",
                 "11 - Remove role",
+                "12 = view employee by Department",
                 "- Exit"
             ]
         }
@@ -93,6 +94,10 @@ function userOptions () {
 
             case "11 - Remove role":
                 removeRole();
+                break;
+
+            case "12 = view employee by Department":
+                viewEmpByDept();
                 break;
             
             case "- Exit":
@@ -186,42 +191,46 @@ async function viewManagers() {
 
 
 //function to add new department
-// function addDept () {
+function addDept () {
 
-//      inquirer.prompt ([
-//         {
-//             name: "DepName",
-//             message: "Please enter the name of the department",
-//             type: "input"
-//         }
-//     ])
-//     .then((department) => { 
-//         console.log(department);
-//         database.addAllDept(department.DepName).then( (rows) => {
-//             let departments = rows;
-//             console.log(`Added ${department.DepName} to the databse.`);
-//         }).then(() => userOptions()); 
-        
-//     });
-    
-// };
-//converting above function into async
-async function addDept() {
-    await inquirer.prompt ([
+     inquirer.prompt ([
         {
             name: "DepName",
             message: "Please enter the name of the department",
             type: "input"
         }
     ])
-    let department;
-    await database.addAllDept(department.DepName);
-    let result = [...department];
-    console.log("\n");
-    console.log(`Added ${department.DepName} to the databse.`);
-    console.table(result[0]);
-    userOptions();
+    .then((department) => { 
+        // console.log(department);
+        database.addAllDept(department.DepName).then( (rows) => {
+            let departments = rows;
+            console.log(`Added ${department.DepName} to the databse.`);
+            // console.table(viewAllDept());
+        })
+        .then(() => userOptions()); 
+        
+    });
+    
 };
+//converting above function into async
+// async function addDept() {
+//     await inquirer.prompt ([
+//         {
+//             name: "DepName",
+//             message: "Please enter the name of the department",
+//             type: "input"
+//         }
+      
+//     ]);
+//         let department;
+//         await database.addAllDept(DepName);
+//         let result = [...department];
+//         console.log("\n");
+//         console.log(`Added ${department.DepName} to the databse.`);
+//         console.table(result[0]);
+//         userOptions();
+   
+// };
 
 
 
@@ -245,16 +254,16 @@ function addRole () {
         }
     ])
     .then((role) => {
-        console.log(role);
-        database.addAllrole(role.title, role.dept, role.salary).then((rows) => {
-            let role = rows;
-            console.log(` Added ${role.title} , ${role.dept} and ${role.salary} to the database`);
-        }).then(() => userOptions());
+        database.addAllrole(role.title, role.dept, role.salary);
+        console.log(`Added ${role.title} in dept ${role.dept} with ${role.salary} PA salary to the database`);
+        console.table(viewRoles());
+        
     });
+           
 };
 // converting above fucntion in async
 // async function addRole () {
-//     await inquirer.prompt([
+//      await inquirer.prompt([
 //         {
 //             name: "title",
 //             message: "Please enter name of the role you would like to add ",
@@ -273,12 +282,9 @@ function addRole () {
 //     ])
 //     let role;
 //     await database.addAllrole(role.title, role.dept, role.salary);
-//     console.log(role.title);
-//     let result = [...role];
-//     console.log("\n");
-//     console.table(result[0]);
-//     userOptions();
-   
+//     console.log(`Added ${role.title} in dept ${role.dept} with ${role.salary} PA salary to the database`);
+//     console.table(viewRoles());
+       
 // };
 
 // function to add new employee
@@ -308,11 +314,9 @@ function addEmployee () {
         }
 
     ]).then((employee) => {
-        console.log(employee);
-        database.addAllEmployee(employee.firstName, employee.lastName, employee.roleId, employee.mangId).then((rows) => {
-            const employee = rows;
-            console.log(`added ${employee.firstName} ${employee.lastName} with ${employee.roleId} to the database`);
-        }).then(() => userOptions());
+             database.addAllEmployee(employee.firstName, employee.lastName, employee.roleId, employee.mangId)
+            console.log(`added ${employee.firstName} ${employee.lastName} with ${employee.roleId} and their manager id ${employee.mangId} to the database`);
+            userOptions();
     });
 };
 
@@ -323,8 +327,7 @@ function updateEmployee() {
             name:"id",
             message: "Please secect their new role ID" ,
             type: "input"
-            
-            
+                      
         },
         {
             name:"roleId",
@@ -332,17 +335,10 @@ function updateEmployee() {
             type: "input"
             
         }
-        // {   name:"newDep",
-        //     message: "Please secect their new Department",
-        //     type: "input"
-            
-        // }
-    ]).then ((employee) => {
-        console.log(employee);
-        database.updateAllEmployee(employee.id, employee.roleId).then((data) => {
-            const employee = data;
-            console.log(`Updated ${employee.roleId} and ${employee.id} to the database`);
-        }).then(() => userOptions());
+        ]).then ((employee) => {
+        database.updateAllEmployee(employee.id, employee.roleId);
+        console.log(`Updated ${employee.roleId} and ${employee.id} to the database`);
+        userOptions();
     })
 
 };
@@ -357,11 +353,9 @@ function removeEmployee() {
         }
 
     ]).then((employee) => {
-        console.log(employee);
-        database.removeAllEmployee(employee.rmEmp).then((data) => {
-            const employee = data;  
-            userOptions();
-        });
+        console.table(employee);
+        database.removeAllEmployee(employee.rmEmp);
+        userOptions();
     })
 };
 
@@ -375,13 +369,10 @@ function removeDept () {
             type: "input"
         }                  
     ]).then((dept) => {
-        console.log(dept);
-        database.removeAlldept(dept.rmDept).then((data) => {
-            const dept = data;
-            userOptions();
-        })
+        database.removeAlldept(dept.rmDept)
+        userOptions();
     })
-}
+};
 
 
 // function to remove Role through Role id
@@ -394,24 +385,22 @@ function removeRole () {
         }                  
     ]).then((role) => {
         console.log(role);
-        database.removeAllRole(role.rmRole).then((data) => {
-            const role = data;
-            userOptions();
-        })
+        database.removeAllRole(role.rmRole);
+        userOptions();       
     })
-}
+};
 
+
+async function viewEmpByDept() {
+    const employee = await database.viewAllEmployeesByDept();
+    const result = [...employee];
+    console.log("\n");
+    //console.table(dept);
+    console.table(result[0]);
+    userOptions();
+};
   
 function exit (){
     console.log("GOodbye!");
     process.exit();
-}
-
-
-
-
-
-
-
-
-
+};

@@ -105,17 +105,18 @@ class Database {
                 console.log(result);              
             
         });
+
     }
 
+    //to view employee by Department 
+    viewAllEmployeesByDept() {
+        return this.connection.promise(). query(
+          `SELECT employee.first_name, employee.last_name, department.department_name AS DEPARTMENT FROM employee JOIN role_table ON employee.role_id = role_table.id JOIN department ON role_table.department_id = department.id ORDER BY department.department_name; `);
+        
+    };
+
+   
 };
-
-
-
-
-// Update employee managers.
-//  View employees by manager.
-//  View employees by department.
-
 
 
 module.exports = new Database(connection);
