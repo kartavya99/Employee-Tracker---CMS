@@ -217,7 +217,8 @@ async function addDept() {
     let department;
     await database.addAllDept(department.DepName);
     let result = [...department];
-    // console.log("\n");
+    console.log("\n");
+    console.log(`Added ${department.DepName} to the databse.`);
     console.table(result[0]);
     userOptions();
 };
