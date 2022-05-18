@@ -207,22 +207,20 @@ async function viewManagers() {
 // };
 //converting above function into async
 async function addDept() {
-    inquirer.prompt ([
+    await inquirer.prompt ([
         {
             name: "DepName",
             message: "Please enter the name of the department",
             type: "input"
         }
-    ]);
-    const department = await database.addAllDept(department.DepName);
+    ])
+    let department;
+    await database.addAllDept(department.DepName);
     let result = [...department];
     // console.log("\n");
     console.table(result[0]);
     userOptions();
 };
-
-
-
 
 
 
@@ -253,7 +251,34 @@ function addRole () {
         }).then(() => userOptions());
     });
 };
-
+// converting above fucntion in async
+// async function addRole () {
+//     await inquirer.prompt([
+//         {
+//             name: "title",
+//             message: "Please enter name of the role you would like to add ",
+//             type: "input"
+//         },
+//         {
+//             name: "dept",
+//             message:"Please enter the department ID",
+//             type: "number"
+//         },
+//         {
+//             name: "salary",
+//             message: "Please enter salary. (formate : 60000)",
+//             type: "number"
+//         }
+//     ])
+//     let role;
+//     await database.addAllrole(role.title, role.dept, role.salary);
+//     console.log(role.title);
+//     let result = [...role];
+//     console.log("\n");
+//     console.table(result[0]);
+//     userOptions();
+   
+// };
 
 // function to add new employee
 function addEmployee () {
