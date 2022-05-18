@@ -7,7 +7,7 @@ const database = require("./db/database");
 // require console table
 const cTable = require('console.table');
 const connection = require("./config/connection");
-const { viewAllEmployees, addAllrole, addAllEmployee } = require("./db/database");
+const { viewAllEmployees, addAllrole, addAllEmployee, removeAllRole } = require("./db/database");
 
 
 
@@ -42,6 +42,7 @@ function userOptions () {
                 "8 - Update an Employee Role",
                 "9 - Remove an Employee",
                 "10 - Remove Department",
+                "11 - Remove role",
                 "- Exit"
             ]
         }
@@ -87,6 +88,10 @@ function userOptions () {
 
             case "10 - Remove Department":
                 removeDept();
+                break;
+
+            case "11 - Remove role":
+                removeRole();
                 break;
             
             case "- Exit":
@@ -299,6 +304,25 @@ function removeDept () {
         })
     })
 }
+
+
+// function to remove Role through Role id
+function removeRole () {
+    return inquirer.prompt([
+        {
+            name:"rmRole",
+            message:"Please choose the deparment ID you want to remove.",
+            type: "input"
+        }                  
+    ]).then((role) => {
+        console.log(role);
+        database.removeAllRole(role.rmRole).then((data) => {
+            const role = data;
+            userOptions();
+        })
+    })
+}
+
   
 function exit (){
     console.log("GOodbye!");
