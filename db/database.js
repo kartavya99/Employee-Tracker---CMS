@@ -12,14 +12,14 @@ class Database {
 
     // to have list of all departments
     viewAllDept () {
-        return this.connection.promise().query("SELECT department_name FROM department")
+        return this.connection.promise().query("SELECT * FROM department")
     };
 
 
     // to have list of roles
     viewAllRoles(){
-        return this.connection.promise().query("SELECT title FROM role_table")
-    };
+        return this.connection.promise().query("SELECT * FROM role_table")     
+     };
 
     // to have list of all employees 
     viewAllEmployees() {
@@ -28,7 +28,7 @@ class Database {
 
     // to have list of all managers
     viewAllManagers(employeeId) {
-        return this.connection.promise().query("SELECT id, first_name, last_name FROM employee WHERE employee.manager_id IS NULL", employeeId)
+        return this.connection.promise().query("SELECT id, first_name, last_name, role_id FROM employee WHERE employee.manager_id IS NULL", employeeId)
         
     };
 
@@ -53,11 +53,11 @@ class Database {
     };
 
     // to add an employee
-    addAllEmployee(firstName, lastName, roleId) {
+    addAllEmployee(firstName, lastName, roleId, manager_id) {
         // check for manager first
         // if employee manager null
         // if employee is not manager then send detials
-        return this.connection.promise().query(`INSERT INTO employee (first_name, last_name, role_id) VALUES ( ? , ? , ? ) ` , [firstName, lastName, roleId] , (err, result ) => {
+        return this.connection.promise().query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ( ? , ? , ?, ? ) ` , [firstName, lastName, roleId, manager_id] , (err, result ) => {
             if (err) {
                 console.log(err);
             }
