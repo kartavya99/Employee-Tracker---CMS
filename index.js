@@ -286,6 +286,23 @@ async function removeEmployee() {
 };
 
 // function to remove department through dept id
+async function removeDept () {
+    let answers = await prompt([
+        {
+            name:"rmDept",
+            message:"Please choose the deparment ID you want to remove.",
+            type: "input"
+        }                  
+    ])
+    await database.removeAlldept(answers.rmDept);
+    const updatedDeptList = await database.viewAllDept();
+    let result = [...updatedDeptList];
+    console.table(result[0]);
+    userOptions();
+
+};
+
+// function to remove Role through Role id
 async function removeRole () {
     let answers = await prompt([
         {
