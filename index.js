@@ -280,6 +280,7 @@ async function addRole () {
         }
     ])
     await database.addAllrole(answers.title, answers.dept, answers.salary);
+    console.log("\n");
     console.log(`Added ${answers.title} in dept ${answers.dept} with ${answers.salary} PA salary to the database`);
     console.table(viewRoles());
        
@@ -344,10 +345,14 @@ async function addEmployee () {
         }
 
     ])
-    await database.addAllEmployee(answers.firstName, answers.lastName, answers.roleId, answers.mangId)
-    console.log(`added ${answers.firstName} ${answers.lastName} with ${answers.roleId} and their manager id ${answers.mangId} to the database`);
-    console.table(viewAllEmployees());
-    // userOptions();
+    await database.addAllEmployee(answers.firstName, answers.lastName, answers.roleId, answers.mangId);
+    console.log("\n");
+    console.log(`added ${answers.firstName} ${answers.lastName} with id # ${answers.roleId} and their manager id ${answers.mangId} to the database`);
+
+    const updatedEmployeeList = await database.viewAllEmployees();
+    let result = [...updatedEmployeeList];
+    console.table(result[0]);
+    userOptions();
     
 };
 
@@ -392,8 +397,14 @@ async function updateEmployee() {
         }
         ])
         await database.updateAllEmployee(answers.id, answers.roleId);
+        console.log("\n");
         console.log(`Updated ${answers.roleId} and ${answers.id} to the database`);
-        userOptions();
+
+        const updatedEmployeeList = await database.viewAllEmployees();
+        let result = [...updatedEmployeeList];
+        console.table(result[0]);
+        userOptions()
+        
 };
 
 
@@ -423,8 +434,12 @@ async function removeEmployee() {
 
     ])
     await database.removeAllEmployee(answers.rmEmp);
-    userOptions();
-    
+
+    const updatedEmployeeList = await database.viewAllEmployees();
+    let result = [...updatedEmployeeList];
+    console.table(result[0]);
+    userOptions()
+   
 };
 
 
@@ -452,8 +467,11 @@ async function removeDept () {
         }                  
     ])
     await database.removeAlldept(answers.rmDept);
+    const updatedDeptList = await database.viewAllDept();
+    let result = [...updatedDeptList];
+    console.table(result[0]);
     userOptions();
-    
+       
 };
 
 
@@ -481,7 +499,11 @@ async function removeRole () {
         }                  
     ])
     await database.removeAllRole(answers.rmRole);
-    userOptions();       
+    const roles = await database.viewAllRoles();
+    const result = [...roles];
+    console.log("\n");
+    console.table(result[0]);
+    userOptions();        
     
 };
 
