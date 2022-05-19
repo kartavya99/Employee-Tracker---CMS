@@ -1,7 +1,7 @@
 
 // Import and require inquirer and figlet 
 const inquirer = require("inquirer");
-// const prompt = require("inquirer");
+const { prompt }  = require("inquirer");
 const figlet = require("figlet");
 // import class Database
 const database = require("./db/database");
@@ -191,79 +191,51 @@ async function viewManagers() {
 
 
 //function to add new department
-function addDept () {
+// function addDept () {
 
-     inquirer.prompt ([
-        {
-            name: "DepName",
-            message: "Please enter the name of the department",
-            type: "input"
-        }
-    ])
-    .then((department) => { 
-        // console.log(department);
-        database.addAllDept(department.DepName).then( (rows) => {
-            let departments = rows;
-            console.log(`Added ${department.DepName} to the databse.`);
-            // console.table(viewAllDept());
-        })
-        .then(() => userOptions()); 
-        
-    });
-    
-};
-//converting above function into async
-// async function addDept() {
-//     await inquirer.prompt ([
+//      inquirer.prompt ([
 //         {
 //             name: "DepName",
 //             message: "Please enter the name of the department",
 //             type: "input"
 //         }
-      
-//     ]);
-//         let department;
-//         await database.addAllDept(DepName);
-//         let result = [...department];
-//         console.log("\n");
-//         console.log(`Added ${department.DepName} to the databse.`);
-//         console.table(result[0]);
-//         userOptions();
-   
+//     ])
+//     .then((department) => { 
+//         // console.log(department);
+//         database.addAllDept(department.DepName).then( (rows) => {
+//             let departments = rows;
+//             console.log(`Added ${department.DepName} to the databse.`);
+//             // console.table(viewAllDept());
+//         })
+//         .then(() => userOptions()); 
+        
+//     });
+    
 // };
+//converting above function into async
+async function addDept() {
+    let answers = await prompt ([
+        {
+            name: "DepName",
+            message: "Please enter the name of the department",
+            type: "input"
+        }
+      
+    ]);
+        await database.addAllDept(answers.DepName);
+        // // let result = [...department];
+        console.log("\n");
+        console.log(`Added ${answers.DepName} department to the databse.`);
+        // console.table(department);
+        userOptions();
+   
+};
 
 
 
 // function to add new Roles
-function addRole () {
-    return inquirer.prompt([
-        {
-            name: "title",
-            message: "Please enter name of the role you would like to add ",
-            type: "input"
-        },
-        {
-            name: "dept",
-            message:"Please enter the department ID",
-            type: "number"
-        },
-        {
-            name: "salary",
-            message: "Please enter salary. (formate : 60000)",
-            type: "number"
-        }
-    ])
-    .then((role) => {
-        database.addAllrole(role.title, role.dept, role.salary);
-        console.log(`Added ${role.title} in dept ${role.dept} with ${role.salary} PA salary to the database`);
-        console.table(viewRoles());
-        
-    });
-           
-};
-// converting above fucntion in async
-// async function addRole () {
-//      await inquirer.prompt([
+// function addRole () {
+//     return inquirer.prompt([
 //         {
 //             name: "title",
 //             message: "Please enter name of the role you would like to add ",
@@ -280,16 +252,74 @@ function addRole () {
 //             type: "number"
 //         }
 //     ])
-//     let role;
-//     await database.addAllrole(role.title, role.dept, role.salary);
-//     console.log(`Added ${role.title} in dept ${role.dept} with ${role.salary} PA salary to the database`);
-//     console.table(viewRoles());
-       
+//     .then((role) => {
+//         database.addAllrole(role.title, role.dept, role.salary);
+//         console.log(`Added ${role.title} in dept ${role.dept} with ${role.salary} PA salary to the database`);
+//         console.table(viewRoles());
+        
+//     });
+           
 // };
+// converting above fucntion in async
+async function addRole () {
+     let answers = await prompt([
+        {
+            name: "title",
+            message: "Please enter name of the role you would like to add ",
+            type: "input"
+        },
+        {
+            name: "dept",
+            message:"Please enter the department ID",
+            type: "number"
+        },
+        {
+            name: "salary",
+            message: "Please enter salary. (formate : 60000)",
+            type: "number"
+        }
+    ])
+    await database.addAllrole(answers.title, answers.dept, answers.salary);
+    console.log(`Added ${answers.title} in dept ${answers.dept} with ${answers.salary} PA salary to the database`);
+    console.table(viewRoles());
+       
+};
 
 // function to add new employee
-function addEmployee () {
-    return inquirer.prompt([
+// function addEmployee () {
+//     return inquirer.prompt([
+//         {
+//             name: "firstName",
+//             message: "Please Enter their first name",
+//             type: "input"
+//         },
+//         {
+//             name: "lastName",
+//             message: "Please Enter their last name",
+//             type: "input"
+//         },
+//         {
+//             name: "roleId",
+//             message: "Please select their role ID",
+//             type: "input"
+            
+//         },
+//         {
+//             name: "mangId",
+//             message: "Please select their manager ID",
+//             type: "input"
+            
+//         }
+
+//     ]).then((employee) => {
+//              database.addAllEmployee(employee.firstName, employee.lastName, employee.roleId, employee.mangId)
+//             console.log(`added ${employee.firstName} ${employee.lastName} with ${employee.roleId} and their manager id ${employee.mangId} to the database`);
+//             userOptions();
+//     });
+// };
+// converting addemployee function inbto async
+async function addEmployee () {
+    let answers = await prompt([
         {
             name: "firstName",
             message: "Please Enter their first name",
@@ -313,16 +343,41 @@ function addEmployee () {
             
         }
 
-    ]).then((employee) => {
-             database.addAllEmployee(employee.firstName, employee.lastName, employee.roleId, employee.mangId)
-            console.log(`added ${employee.firstName} ${employee.lastName} with ${employee.roleId} and their manager id ${employee.mangId} to the database`);
-            userOptions();
-    });
+    ])
+    await database.addAllEmployee(answers.firstName, answers.lastName, answers.roleId, answers.mangId)
+    console.log(`added ${answers.firstName} ${answers.lastName} with ${answers.roleId} and their manager id ${answers.mangId} to the database`);
+    console.table(viewAllEmployees());
+    // userOptions();
+    
 };
 
-function updateEmployee() {
+//function to updated employee
+// function updateEmployee() {
     
-    return inquirer.prompt ([
+//     return inquirer.prompt ([
+//         {
+//             name:"id",
+//             message: "Please secect their new role ID" ,
+//             type: "input"
+                      
+//         },
+//         {
+//             name:"roleId",
+//             message: "Please secect their current employee ID",
+//             type: "input"
+            
+//         }
+//         ]).then ((employee) => {
+//         database.updateAllEmployee(employee.id, employee.roleId);
+//         console.log(`Updated ${employee.roleId} and ${employee.id} to the database`);
+//         userOptions();
+//     })
+
+// };
+// updating above function into async await
+async function updateEmployee() {
+    
+    let answers = await prompt ([
         {
             name:"id",
             message: "Please secect their new role ID" ,
@@ -335,59 +390,99 @@ function updateEmployee() {
             type: "input"
             
         }
-        ]).then ((employee) => {
-        database.updateAllEmployee(employee.id, employee.roleId);
-        console.log(`Updated ${employee.roleId} and ${employee.id} to the database`);
+        ])
+        await database.updateAllEmployee(answers.id, answers.roleId);
+        console.log(`Updated ${answers.roleId} and ${answers.id} to the database`);
         userOptions();
-    })
-
 };
 
+
+
 // functionality to remove employee
-function removeEmployee() {
-    return inquirer.prompt ([
+// function removeEmployee() {
+//     return inquirer.prompt ([
+//         {
+//            name:"rmEmp",
+//            message:"Please choose the employee ID you want to remove.",
+//            type: "input"
+//         }
+
+//     ]).then((employee) => {
+//         database.removeAllEmployee(employee.rmEmp);
+//         userOptions();
+//     })
+// };
+//converting above function to async 
+async function removeEmployee() {
+    let answers = await prompt ([
         {
            name:"rmEmp",
            message:"Please choose the employee ID you want to remove.",
            type: "input"
         }
 
-    ]).then((employee) => {
-        console.table(employee);
-        database.removeAllEmployee(employee.rmEmp);
-        userOptions();
-    })
+    ])
+    await database.removeAllEmployee(answers.rmEmp);
+    userOptions();
+    
 };
 
 
+
 // function to remove deparment through dept id
-function removeDept () {
-    return inquirer.prompt([
+// function removeDept () {
+//     return inquirer.prompt([
+//         {
+//             name:"rmDept",
+//             message:"Please choose the deparment ID you want to remove.",
+//             type: "input"
+//         }                  
+//     ]).then((dept) => {
+//         database.removeAlldept(dept.rmDept)
+//         userOptions();
+//     })
+// };
+// converting abvoe function into async await
+async function removeDept () {
+    let answers = await prompt([
         {
             name:"rmDept",
             message:"Please choose the deparment ID you want to remove.",
             type: "input"
         }                  
-    ]).then((dept) => {
-        database.removeAlldept(dept.rmDept)
-        userOptions();
-    })
+    ])
+    await database.removeAlldept(answers.rmDept);
+    userOptions();
+    
 };
 
 
+
 // function to remove Role through Role id
-function removeRole () {
-    return inquirer.prompt([
+// function removeRole () {
+//     return inquirer.prompt([
+//         {
+//             name:"rmRole",
+//             message:"Please choose the deparment ID you want to remove.",
+//             type: "input"
+//         }                  
+//     ]).then((role) => {
+//         database.removeAllRole(role.rmRole);
+//         userOptions();       
+//     })
+// };
+//converting above function async await
+async function removeRole () {
+    let answers = await prompt([
         {
             name:"rmRole",
             message:"Please choose the deparment ID you want to remove.",
             type: "input"
         }                  
-    ]).then((role) => {
-        console.log(role);
-        database.removeAllRole(role.rmRole);
-        userOptions();       
-    })
+    ])
+    await database.removeAllRole(answers.rmRole);
+    userOptions();       
+    
 };
 
 
@@ -395,7 +490,6 @@ async function viewEmpByDept() {
     const employee = await database.viewAllEmployeesByDept();
     const result = [...employee];
     console.log("\n");
-    //console.table(dept);
     console.table(result[0]);
     userOptions();
 };
